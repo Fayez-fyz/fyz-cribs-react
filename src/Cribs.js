@@ -13,7 +13,7 @@ const Cribs = () => {
   const [location, setLocation] = useState("");
   const [search, setSearch] = useState("");
 
-  async function getCribs() {
+  let GetData= async () => {
     try {
       const cribs = await axios.get("https://fyz-cribs-app.herokuapp.com/cribs");
       setCribs([...cribs.data]);
@@ -32,7 +32,7 @@ const Cribs = () => {
       setName("");
       setImg("");
       setLocation("");
-      getCribs();
+      GetData();
     } catch (error) {
       console.log(error);
     }
@@ -47,7 +47,7 @@ const Cribs = () => {
       setName("");
       setImg("");
       setLocation("");
-      getCribs();
+      GetData();
     } catch (error) {
       console.log(error);
     }
@@ -63,14 +63,14 @@ const Cribs = () => {
   let handleDelete = async (id) => {
     try {
       const del = await axios.delete(`https://fyz-cribs-app.herokuapp.com/cribs/${id}`);
-      getCribs();
+      GetData();
     } catch (error) {
-      console.log("data is not comming", error);
+      console.log(error);
     }
   };
 
   useEffect(() => {
-    getCribs();
+    GetData();
   }, []);
 
   return (
